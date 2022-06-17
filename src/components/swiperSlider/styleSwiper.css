@@ -34,3 +34,9 @@ swiper {
   height: 100%;
   object-fit: cover;
 }
+
+@media all and (max-width: 768px) {
+  .swiper {
+    display: none;
+  }
+}

@@ -32,14 +32,22 @@ export default function Register() {
   }
 
   return (
-    <Flex h='100vh' align='center' justify='space-between' paddingRight='100px'>
+    <Flex h='100vh' w='100vw' align='center' justify='center' gap='5'>
       <SwiperSlider/> 
-      <Box >
+      <Box 
+        w='50vw' 
+        sx={{
+            '@media (max-width: 768px)': {
+              width: '80vw',
+              px: '0'
+            }}} 
+        px='10'
+      >
       {error && <Alert message={error}/>}
         <ToogleDarkMode />
         <Text fontSize='6xl'>Register</Text>
         <form onSubmit={handleSubmit}>
-          <FormControl w='2xl' display='flex' flexDirection='column'>
+          <FormControl display='flex' flexDirection='column'>
             <FormLabel htmlFor="email" pt='2'>Email</FormLabel>
             <Input 
               variant='flushed'
