@@ -6,6 +6,11 @@ import Alert from "./Alert";
 import ToogleDarkMode from './toogleDarkMode/ToogleDarkMode';
 import SwiperSlider from "./swiperSlider/SwiperSlider";
 
+
+import { InputGroup, InputRightElement, IconButton  } from '@chakra-ui/react'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+
+
 function Login() {
   const [error, setError] = useState();
   const [user, setUser] = useState({
@@ -49,61 +54,90 @@ function Login() {
     }
   }
 
+  // PASSWORD
+  const [show, setShow] = useState(false)
+  const handleClickShowPassword = () => setShow(!show)
+
   return (
     <Flex h='100vh' w='100vw' align='center' justify='center' gap='5'>
       <SwiperSlider /> 
-      <Box 
-        w='50vw' 
-        sx={{
-            '@media (max-width: 768px)': {
-              width: '80vw',
-              px: '0'
-            }}} 
-        px='10'
-        >
-        {error && <Alert message={error}/>}
-        <ToogleDarkMode />
-        <Text fontSize='6xl' fontWeight='bold'>Login</Text>
-        <form onSubmit={handleSubmit}>
-          <FormControl display='flex' flexDirection='column'>
-            <FormLabel htmlFor="email" pt='2'>Email</FormLabel>
-            <Input 
-              variant='flushed'
-              type="email" 
-              name="email"
-              placeholder="youremail@hotmail.com" 
-              isRequired
-              onChange={handleChange} 
-            />
+      <Flex direction='column' h='100%'>
+        <Flex h='30%' justify='flex-end' p='3'><ToogleDarkMode /></Flex>
+        <Box 
+          w='50vw' 
+          sx={{
+              '@media (max-width: 768px)': {
+                width: '80vw',
+                px: '0'
+              }}} 
+          px='10'
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          >
+          {error && <Alert message={error}/>}
+          <Text fontSize='6xl' fontWeight='bold'>Login</Text>
+          <Flex direction='column' w='70%'>
+            <form onSubmit={handleSubmit}>
+              <FormControl display='flex' flexDirection='column'>
 
-            <FormLabel htmlFor="password" pt='2'>Password</FormLabel>
-            <Input 
-              variant='flushed'
-              type="password" 
-              name="password" 
-              id="password" 
-              placeholder="********"
-              isRequired
-              onChange={handleChange} />
-          
-            <Stack direction={['column', 'row']} spacing='24px' my='2' justify='center' align='center'>
-              <Button
-                colorScheme='green' 
-                type='submit'>
-                Login
-              </Button>
-              <Link to='/register'>You do not have an account? Sign up</Link>
-            </Stack>
-          </FormControl>
-        </form>
+                <FormLabel htmlFor="email" pt='2' fontSize='2xl' fontWeight='thin'>Email</FormLabel>
+                <Input 
+                  variant='outline'
+                  size='lg'
+                  id="email"
+                  type="email" 
+                  name="email"
+                  placeholder="youremail@hotmail.com" 
+                  isRequired
+                  onChange={handleChange} 
+                />
 
-        <Flex gap='4' alignItems='center' justifyContent='center' my='5'>
-          <Button onClick={handleGoogleSignin} colorScheme='blue'>Login whit Google</Button>
-          <Text color='red.600'>
-            <a  href="#!" onClick={handleResetPassword}>Forgot Password?</a>
-          </Text> 
-        </Flex>
-      </Box>
+                <FormLabel htmlFor="password" pt='2' fontSize='2xl' fontWeight='thin' >Password</FormLabel>
+                <InputGroup id="password" size='lg' variant='outline' onChange={handleChange}>
+                  <Input
+                    pr='4.5rem'
+                    type={show ? 'text' : 'password'}
+                    name='password'
+                    placeholder='********'
+                  />
+                  <InputRightElement 
+                    // width='4.5rem' 
+                    >
+                    <IconButton 
+                        size='sm' 
+                        icon={show ? <ViewOffIcon /> : <ViewIcon color='gray.100' />  }
+                        isRound='true'
+                        onClick={handleClickShowPassword}
+                    ></IconButton>
+                    {/* <Button
+                      // h='1.75rem'  
+                      size='sm' onClick={handleClickShowPassword}>
+                      {show ? <ViewOffIcon /> : <ViewIcon />}
+                    </Button> */}
+                  </InputRightElement>
+                </InputGroup>
+
+                <Stack direction={['column', 'row']} spacing='24px' my='2' justify='center' align='center'>
+                  <Button
+                    colorScheme='green' 
+                    type='submit'>
+                    Login
+                  </Button>
+                  <Link to='/register'>You do not have an account? Sign up</Link>
+                </Stack>
+              </FormControl>
+            </form>
+
+            <Flex gap='4' alignItems='center' justifyContent='center' my='5'>
+              <Button onClick={handleGoogleSignin} colorScheme='blue'>Login whit Google</Button>
+              <Text color='red.600'>
+                <a  href="#!" onClick={handleResetPassword}>Forgot Password?</a>
+              </Text> 
+            </Flex>
+          </Flex>
+        </Box>
+      </Flex>
     </Flex>
   )
 }
