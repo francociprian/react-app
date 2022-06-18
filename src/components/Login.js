@@ -15,9 +15,11 @@ function Login() {
   
   const { login, loginWhitGoogle, resetPassword } = useAuth()
   const navigate = useNavigate()
+
   const handleChange = ({target: {name, value}}) => {
     setUser({...user, [name]:value})
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')

@@ -3,6 +3,8 @@ import LoginLogo from '../assets/images/LoginLogo.png';
 import { FiLogOut} from "react-icons/fi";
 import { Text, Avatar, HStack, IconButton, Flex } from '@chakra-ui/react';
 import ToogleDarkMode from "./toogleDarkMode/ToogleDarkMode";
+import Load from "./Load";
+import { Link } from "react-router-dom";
 
 function Home() {
 
@@ -14,7 +16,7 @@ function Home() {
       console.log(error);
     }
   }
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Load />
 
   return (
     <>
@@ -43,7 +45,9 @@ function Home() {
         justify='center'
         align='center'
         >
-        <Text as='ins' color='orange.300' fontSize='6xl'>Welcome to the app</Text>
+        <Link to='/welcome'> 
+          <Text as='ins' color='orange.300' fontSize='6xl'>Welcome to the app</Text>
+        </Link>
       </Flex>
     </>
   )
